@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.26.0 FATAL_ERROR)
 
 # Set up the project
 project(threadx
@@ -70,3 +70,5 @@ set(CPACK_SOURCE_IGNORE_FILES
 )
 set(CPACK_VERBATIM_VARIABLES YES)
 include(CPack)
+
+install(TARGETS ${PROJECT_NAME})
