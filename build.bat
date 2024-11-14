@@ -48,12 +48,9 @@ GOTO %section%
 
 :gen
 ECHO ***** GENERATE CMAKE *****
-IF "%builder%"=="nmake" cmake -G NMake Makefiles -DTOOLCHAIN_DIR=C:/NXP/S32DS.3.5/S32DS/build_tools/gcc_v10.2/gcc-10.2-arm32-eabi -DCMAKE_TOOLCHAIN_FILE=%source_dir%/cmake/r2_cortex_m7.cmake %source_dir%
+IF "%builder%"=="nmake" cmake -G "NMake Makefiles" -DTOOLCHAIN_DIR=C:/NXP/S32DS.3.5/S32DS/build_tools/gcc_v10.2/gcc-10.2-arm32-eabi -DCMAKE_TOOLCHAIN_FILE=%source_dir%/cmake/r2_cortex_m7.cmake %source_dir%
+IF "%builder%"=="mingw" cmake -G "MinGW Makefiles" -DTOOLCHAIN_DIR=C:/NXP/S32DS.3.5/S32DS/build_tools/gcc_v10.2/gcc-10.2-arm32-eabi -DCMAKE_TOOLCHAIN_FILE=%source_dir%/cmake/r2_cortex_m7.cmake -DCMAKE_MAKE_PROGRAM=C:/Users/cmercier/Downloads/w64devkit-1.23.0/w64devkit/bin/make.exe %source_dir%
 IF "%builder%"=="ninja" cmake -G Ninja -DTOOLCHAIN_DIR=C:/NXP/S32DS.3.5/S32DS/build_tools/gcc_v10.2/gcc-10.2-arm32-eabi -DCMAKE_TOOLCHAIN_FILE=%source_dir%/cmake/r2_cortex_m7.cmake %source_dir%
-IF "%builder%"=="eclipse" 
-   set eclipse_generator="Eclipse CDT4 - Ninja"
-   cmake -G %eclipse_generator% -DTOOLCHAIN_DIR=C:/NXP/S32DS.3.5/S32DS/build_tools/gcc_v10.2/gcc-10.2-arm32-eabi -DCMAKE_TOOLCHAIN_FILE=%source_dir%/cmake/r2_cortex_m7.cmake %source_dir%
-IF %ERRORLEVEL% NEQ 0 GOTO end_pop
 IF NOT "%section%"=="all" GOTO end_pop  REM end if partial
 
 
