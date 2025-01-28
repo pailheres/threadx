@@ -38,7 +38,7 @@
 /*                                                                        */
 /*  DESCRIPTION                                                           */
 /*                                                                        */
-/*    This function builds a stack frame on the supplied thread's stack.  */
+/*    This function builds a stack frame on the supplied thread stack.    */
 /*    The stack frame results in a fake interrupt return to the supplied  */
 /*    function pointer.                                                   */
 /*                                                                        */

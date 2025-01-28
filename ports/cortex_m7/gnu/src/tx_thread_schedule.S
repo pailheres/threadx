@@ -97,7 +97,7 @@ _tx_thread_schedule:
     LDR     r2, =_tx_thread_preempt_disable         // Build address of preempt disable flag
     STR     r0, [r2, #0]                            // Clear preempt disable flag
 
-    /* Clear CONTROL.FPCA bit so VFP registers aren't unnecessarily stacked.  */
+    /* Clear CONTROL.FPCA bit so VFP registers arent unnecessarily stacked.  */
 
 #ifdef __ARM_FP
     MRS     r0, CONTROL                             // Pickup current CONTROL register
@@ -167,7 +167,7 @@ __tx_ts_handler:
     /* Recover PSP and preserve current thread context.  */
 
     STR     r3, [r0]                                // Set _tx_thread_current_ptr to NULL
-    MRS     r12, PSP                                // Pickup PSP pointer (thread's stack pointer)
+    MRS     r12, PSP                                // Pickup PSP pointer (threads stack pointer)
     STMDB   r12!, {r4-r11}                          // Save its remaining registers
 #ifdef __ARM_FP
     TST     LR, #0x10                               // Determine if the VFP extended frame is present
@@ -178,13 +178,13 @@ _skip_vfp_save:
     LDR     r4, =_tx_timer_time_slice               // Build address of time-slice variable
     STMDB   r12!, {LR}                              // Save LR on the stack
 
-    /* Determine if time-slice is active. If it isn't, skip time handling processing.  */
+    /* Determine if time-slice is active. If it isnt, skip time handling processing.  */
 
     LDR     r5, [r4]                                // Pickup current time-slice
     STR     r12, [r1, #8]                           // Save the thread stack pointer
     CBZ     r5, __tx_ts_new                         // If not active, skip processing
 
-    /* Time-slice is active, save the current thread's time-slice and clear the global time-slice variable.  */
+    /* Time-slice is active, save the current threads time-slice and clear the global time-slice variable.  */
 
     STR     r5, [r1, #24]                           // Save current time-slice
 
@@ -226,7 +226,7 @@ __tx_ts_restore:
     ADD     r7, r7, #1                              // Increment the thread run count
     STR     r7, [r1, #4]                            // Store the new run count
 
-    /* Setup global time-slice with thread's current time-slice.  */
+    /* Setup global time-slice with threads current time-slice.  */
 
     STR     r5, [r4]                                // Setup global time-slice
 
@@ -247,8 +247,8 @@ __tx_ts_restore:
     VLDMIA  r12!, {s16-s31}                         // Yes, restore additional VFP registers
 _skip_vfp_restore:
 #endif
-    LDMIA   r12!, {r4-r11}                          // Recover thread's registers
-    MSR     PSP, r12                                // Setup the thread's stack pointer
+    LDMIA   r12!, {r4-r11}                          // Recover threads registers
+    MSR     PSP, r12                                // Setup the threads stack pointer
 
     /* Return to thread.  */
 
